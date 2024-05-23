@@ -6,8 +6,8 @@
 <body>
   <h1>Link Converter</h1>
   <form>
-    <label for="input-link">Enter link (with https://):</label>
-    <input type="text" id="input-link" name="input-link">
+    <label for="input-link">Put here the link to your creation:</label>
+    <input type="text" id="input-link" name="input-link" placeholder="Enter link here...">
     <button type="submit">Convert</button>
   </form>
   <div id="output-links"></div>
@@ -20,7 +20,7 @@
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const link = inputLink.value;
-      const regex = /^https:\/\/creator\.nightcafe\.studio\/creation\/([^\/\?]+)/;
+      const regex = /creator\.nightcafe\.com\/creation\/([^\/\?]+)/;
       const match = link.match(regex);
       if (match) {
         const code = match[1];
