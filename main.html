@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Link Converter</title>
+</head>
+<body>
+  <h1>Link Converter</h1>
+  <form>
+    <label for="input-link">Enter link:</label>
+    <input type="text" id="input-link" name="input-link">
+    <button type="submit">Convert</button>
+  </form>
+  <div id="output-link"></div>
+
+  <script>
+    const form = document.querySelector('form');
+    const inputLink = document.querySelector('#input-link');
+    const outputLink = document.querySelector('#output-link');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const link = inputLink.value;
+      const regex = /^https:\/\/creator\.nightcafe\.studio\/creation\/([^\/\?]+)/;
+      const match = link.match(regex);
+      if (match) {
+        const code = match[1];
+        const newLink = `https://creator.nightcafe.studio/create/text-to-image?copy=${code}&evolve=1&forceAlgo=1`;
+        outputLink.textContent = `New link: ${newLink}`;
+        outputLink.innerHTML = `<a href="${newLink}" target="_blank">${newLink}</a>`;
+      } else {
+        outputLink.textContent = 'Invalid link';
+      }
+    });
+  </script>
+</body>
+</html>
