@@ -6,16 +6,16 @@
 <body>
   <h1>Link Converter</h1>
   <form>
-    <label for="input-link">Enter link:</label>
+    <label for="input-link">Enter link (with https://):</label>
     <input type="text" id="input-link" name="input-link">
     <button type="submit">Convert</button>
   </form>
-  <div id="output-link"></div>
+  <div id="output-links"></div>
 
   <script>
     const form = document.querySelector('form');
     const inputLink = document.querySelector('#input-link');
-    const outputLink = document.querySelector('#output-link');
+    const outputLinks = document.querySelector('#output-links');
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -24,11 +24,14 @@
       const match = link.match(regex);
       if (match) {
         const code = match[1];
-        const newLink = `https://creator.nightcafe.studio/create/text-to-image?copy=${code}&evolve=1&forceAlgo=1`;
-        outputLink.textContent = `New link: ${newLink}`;
-        outputLink.innerHTML = `<a href="${newLink}" target="_blank">${newLink}</a>`;
+        const oldLink = `https://creator.nightcafe.studio/create/text-to-image?copy=${code}&evolve=1&forceAlgo=1`;
+        const newLink = `https://creator.nightcafe.studio/studio?copy=${code}&evolve=1`;
+        outputLinks.innerHTML = `
+          <p>New link (old interface): <a href="${oldLink}" target="_blank">${oldLink}</a></p>
+          <p>New link (new interface): <a href="${newLink}" target="_blank">${newLink}</a></p>
+        `;
       } else {
-        outputLink.textContent = 'Invalid link';
+        outputLinks.textContent = 'Invalid link';
       }
     });
   </script>
